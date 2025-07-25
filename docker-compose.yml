@@ -3,14 +3,22 @@ services:
     build: ./example-backend/
     volumes:
       - ./example-backend/:/devopswithdocker
-    container_name: backend
+    container_name: dwd-backend
     ports:
       - 8080:8080
+    environment:
+      - REDIS_HOST=redis
 
   frontend:
     build: ./example-frontend/
     volumes:
       - ./example-frontend/:/devopswithdocker
-    container_name: frontend
+    container_name: dwd-frontend
     ports:
       - 5001:5001
+
+  redis:
+    image: redis
+    container_name: dwd-redis
+    ports:
+      - 6379:6379
